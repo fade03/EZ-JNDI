@@ -13,6 +13,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+/**
+ * Needs:
+ *  - javax.el.ELProcessor
+ *  - org.apache.naming.factory.BeanFactory
+ */
 public class TomcatInterceptor implements LDAPInterceptor {
     @Override
     public void sendResult(Entry entry, InMemoryInterceptedSearchResult result) throws LDAPException, IOException {
