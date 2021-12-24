@@ -24,4 +24,4 @@ java -jar ezjndi1.0.jar -lp={port1} -hp={port2} -c="{command}"
 
 TODO:
 - 直接返回序列化数据
-- Windows环境下利用cmd执行命令（`cmd -c {command}`）
+- Windows环境下利用cmd执行命令（`cmd /c {command}`）
