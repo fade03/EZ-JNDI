@@ -11,6 +11,6 @@ public class Config {
     public int hp = 8080;
     @Parameter(names = {"-c", "--command"}, description = "Command", order = 2)
     public static String command = "open -a Calculator";
-    @Parameter(names = "--help", help = true)
+    @Parameter(names = {"-h", "--help"}, help = true)
     public boolean help;
 }
