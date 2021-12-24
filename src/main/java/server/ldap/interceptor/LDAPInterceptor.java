@@ -8,5 +8,5 @@ import com.unboundid.ldap.sdk.LDAPException;
 import java.io.IOException;
 
 public interface LDAPInterceptor {
-    void sendResult(Entry entry, InMemoryInterceptedSearchResult result) throws LDAPException, IOException;
+    void sendResult(Entry entry, InMemoryInterceptedSearchResult result) throws Exception;
 }

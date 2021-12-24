@@ -15,17 +15,6 @@ public class OperationInterceptor implements LDAPInterceptor {
         this.codebase = codebase;
     }
 
-//    @Override
-//    public void processSearchResult(InMemoryInterceptedSearchResult result) {
-//        String base = result.getRequest().getBaseDN();
-//        Entry entry = new Entry(base);
-//        try {
-//            this.sendResult(entry, result);
-//        } catch (Exception e1) {
-//            e1.printStackTrace();
-//        }
-//    }
-
     @Override
     public void sendResult(Entry entry, InMemoryInterceptedSearchResult result) throws LDAPException {
         entry.addAttribute("javaClassName", "foo");

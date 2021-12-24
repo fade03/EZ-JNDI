@@ -15,7 +15,19 @@ public class Main {
             cli.usage();
             return;
         }
+
+        banner();
         new Thread(new HTTPServer().acceptCfg(config)).start();
         new Thread(new LDAPServer().acceptCfg(config)).start();
+    }
+
+    public static void banner() {
+        System.out.println("\n" +
+                " ______     ______       __     __   __     _____     __    \n" +
+                "/\\  ___\\   /\\___  \\     /\\ \\   /\\ \"-.\\ \\   /\\  __-.  /\\ \\   \n" +
+                "\\ \\  __\\   \\/_/  /__   _\\_\\ \\  \\ \\ \\-.  \\  \\ \\ \\/\\ \\ \\ \\ \\  \n" +
+                " \\ \\_____\\   /\\_____\\ /\\_____\\  \\ \\_\\\\\"\\_\\  \\ \\____-  \\ \\_\\ \n" +
+                "  \\/_____/   \\/_____/ \\/_____/   \\/_/ \\/_/   \\/____/   \\/_/ \n" +
+                "                                                            \n");
     }
 }

