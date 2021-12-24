@@ -1,5 +1,5 @@
 # EZ-JNDI
-一键启动JNDI测试/利用环境，目录中的`ezjndi1.0.jar`是已经编译好的版本。
+一键启动JNDI测试/利用环境，目录中的 `ezjndi1.0.jar` 是已经编译好的 jar 包
 
 LDAP Payload：
 ```text
@@ -23,6 +23,7 @@ java -jar ezjndi1.0.jar -lp={port1} -hp={port2} -c="{command}"
 ```
 
 使用截图：
+
 ![img.png](img/img.png)
 
 ![img.png](img/img2.png)
