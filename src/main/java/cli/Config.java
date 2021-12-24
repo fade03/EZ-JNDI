@@ -10,7 +10,7 @@ public class Config {
     @Parameter(names = {"-hp"}, description = "HTTP Port", order = 1)
     public int hp = 8080;
     @Parameter(names = {"-c", "--command"}, description = "Command", order = 2)
-    public String command = "open -a Calculator";
+    public static String command = "open -a Calculator";
     @Parameter(names = "--help", help = true)
     public boolean help;
 }

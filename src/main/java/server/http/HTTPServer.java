@@ -20,10 +20,10 @@ public class HTTPServer implements Server {
     @Override
     public void run() {
         int hp = cfg.hp;
-        String command = cfg.command;
+//        String command = cfg.command;
         try {
             HttpServer httpServer = HttpServer.create(new InetSocketAddress(hp), 0);
-            httpServer.createContext("/Foo.class", new ExecHandler().acceptCmd(command));
+            httpServer.createContext("/Foo.class", new ExecHandler());
             httpServer.start();
             System.out.printf("[HTTP] listen on %d...\n", hp);
         } catch (IOException e) {

@@ -32,6 +32,18 @@
             <artifactId>unboundid-ldapsdk</artifactId>
             <version>6.0.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>8.5.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-el</artifactId>
+            <version>8.5.11</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -5,12 +5,12 @@ import com.unboundid.ldap.listener.InMemoryDirectoryServer;
 import com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;
 import com.unboundid.ldap.listener.InMemoryListenerConfig;
 import server.Server;
+import server.ldap.dispatcher.OperationDispatcher;
 
 import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocketFactory;
 import java.net.InetAddress;
-import java.net.URL;
 
 public class LDAPServer implements Server {
     private static final String LDAP_BASE = "dc=example,dc=com";
@@ -25,11 +25,10 @@ public class LDAPServer implements Server {
 
     @Override
     public void run() {
-        String codebase = "http://127.0.0.1:8080/Foo.class";
         int lp = this.cfg.lp;
         try {
-            InMemoryDirectoryServerConfig cfg = new InMemoryDirectoryServerConfig(LDAP_BASE);
-            cfg.setListenerConfigs(new InMemoryListenerConfig(
+            InMemoryDirectoryServerConfig config = new InMemoryDirectoryServerConfig(LDAP_BASE);
+            config.setListenerConfigs(new InMemoryListenerConfig(
                     "listen",
                     InetAddress.getByName("0.0.0.0"),
                     lp,
@@ -38,10 +37,11 @@ public class LDAPServer implements Server {
                     (SSLSocketFactory) SSLSocketFactory.getDefault()
             ));
 
-            cfg.addInMemoryOperationInterceptor(new OperationInterceptor(new URL(codebase)));
+            config.addInMemoryOperationInterceptor(new OperationDispatcher());
+//            config.addInMemoryOperationInterceptor(new OperationInterceptor(new URL(codebase)));
 //            cfg.addInMemoryOperationInterceptor(new RSOperationInterceptor(this.cfg.command));
 
-            InMemoryDirectoryServer ds = new InMemoryDirectoryServer(cfg);
+            InMemoryDirectoryServer ds = new InMemoryDirectoryServer(config);
             ds.startListening();
             System.out.printf("[LDAP] listen on %d...\n", lp);
         } catch (Exception e) {
