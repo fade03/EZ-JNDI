@@ -25,3 +25,18 @@ java -jar ezjndi1.0.jar -lp={port1} -hp={port2} -c="{command}"
 TODO:
 - 直接返回序列化数据
 - Windows环境下利用cmd执行命令（`cmd /c {command}`）
+---
+️备注：由于项目依赖使用了jdk自带的`rt.jar`，其默认不在JVM的 classpath 中，所以如果想修改源代码编译自己的版本，在编译前请修改`pom.xml`，将`<bootclasspath>`标签的值改为自己的`JAVA_HOMOE`：
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.1</version>
+    <configuration>
+        <compilerArguments>
+            <verbose />
+            <bootclasspath>${java.home}/lib/rt.jar${path.separator}${java.home}/lib/jce.jar${path.separator}${java.home}/lib/jsse.jar</bootclasspath>
+        </compilerArguments>
+    </configuration>
+</plugin>
+```
