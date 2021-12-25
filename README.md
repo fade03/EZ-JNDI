@@ -32,6 +32,7 @@ java -jar ezjndi1.0.jar -lp={port1} -hp={port2} -c="{command}"
 
 TODO:
 - 增加gadget
+- 支持动态执行命令，如`ldap://{IP}:{Port}/Foo/{command}`
 - Windows环境下利用cmd执行命令（`cmd /c {command}`）
 ---
 ️备注：由于项目依赖使用了jdk自带的`rt.jar`，其默认不在JVM的 classpath 中，所以如果想修改源代码编译自己的版本，在编译前请修改`pom.xml`，将`<bootclasspath>`标签的值改为自己的`JAVA_HOMOE`：
