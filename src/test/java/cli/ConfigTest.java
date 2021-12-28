@@ -8,7 +8,7 @@ public class ConfigTest {
     @Test
     public void testParams() {
         String[] args = new String[]{"-hp=8081", "-lp=2099", "-c=whoami"};
-        Config config = new Config();
+        Config config = Config.getGlobalInstance();
         JCommander.newBuilder().addObject(config).build().parse(args);
 
         Assert.assertEquals(8081, config.hp);

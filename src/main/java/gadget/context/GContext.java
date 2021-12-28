@@ -1,7 +1,6 @@
 package gadget.context;
 
-import gadget.CCK1;
-import gadget.ObjectPayload;
+import gadget.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +9,14 @@ public class GContext {
     private Map<String, ObjectPayload> mapping = new HashMap<>();
 
     public GContext() {
+        this.init();
+    }
+
+    public void init() {
         mapping.put("cck1", new CCK1());
+        mapping.put("cck2", new CCK2());
+        mapping.put("cck3", new CCK3());
+        mapping.put("cck4", new CCK4());
     }
 
     public ObjectPayload getGadget(String name) throws Exception {
