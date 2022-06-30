@@ -11,7 +11,7 @@ import server.ldap.interceptor.TomcatInterceptor;
 import java.net.URL;
 
 public class OperationDispatcher extends InMemoryOperationInterceptor {
-    private final String CB_PREFIX = "http://127.0.0.1:" + Config.getGlobalInstance().hp + "/";
+    private final String CB_PREFIX = "http://0.0.0.0:" + Config.getGlobalInstance().hp + "/";
 
     @Override
     public void processSearchResult(InMemoryInterceptedSearchResult result) {

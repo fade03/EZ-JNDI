@@ -20,7 +20,7 @@ public class Main {
             return;
         }
 
-        new Thread(new HTTPServer().acceptCfg(config)).start();
-        new Thread(new LDAPServer().acceptCfg(config)).start();
+        new Thread(new HTTPServer(config)).start();
+        new Thread(new LDAPServer(config)).start();
     }
 }

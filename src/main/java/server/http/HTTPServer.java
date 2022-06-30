@@ -11,11 +11,10 @@ import java.net.InetSocketAddress;
 
 public class HTTPServer implements Server {
 
-    private Config cfg;
+    private final Config cfg;
 
-    public Server acceptCfg(Config cfg) {
+    public HTTPServer(Config cfg) {
         this.cfg = cfg;
-        return this;
     }
 
     @Override

@@ -14,13 +14,10 @@ import java.net.InetAddress;
 
 public class LDAPServer implements Server {
     private static final String LDAP_BASE = "dc=example,dc=com";
-    private Config cfg;
+    private final Config cfg;
 
-    @Override
-    public Server acceptCfg(Config cfg) {
+    public LDAPServer(Config cfg) {
         this.cfg = cfg;
-
-        return this;
     }
 
     @Override
